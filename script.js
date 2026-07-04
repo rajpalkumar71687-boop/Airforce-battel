@@ -1,4 +1,4 @@
-const canvas = document.getElementById("gameCanvas");
+let explosions = [];const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
@@ -72,7 +72,19 @@ ctx.fillText("Health : " + health, 20, 70);
 if (enemy.y > canvas.height) {
     enemies.splice(eIndex, 1);
     health--;
+explosions.forEach((exp, index) => {
+    ctx.beginPath();
+    ctx.arc(exp.x + 20, exp.y + 20, exp.size / 2, 0, Math.PI * 2);
+    ctx.fillStyle = "orange";
+    ctx.fill();
 
+    exp.life--;
+    exp.size += 1;
+
+    if (exp.life <= 0) {
+        explosions.splice(index, 1);
+    }
+});
     if (health <= 0) {
         alert("Game Over!\nScore: " + score);
         location.reload();
@@ -84,11 +96,24 @@ if (enemy.y > canvas.height) {
 
         bullets.forEach((bullet, bIndex) => {
 
-            if (
-                bullet.x < enemy.x + enemy.width &&
-                bullet.x + bullet.width > enemy.x &&
-                bullet.y < enemy.y + enemy.height &&
-                bullet.y + bullet.height > enemy.y
+            if (if (
+    bullet.x < enemy.x + enemy.width &&
+    bullet.x + bullet.width > enemy.x &&
+    bullet.y < enemy.y + enemy.height &&
+    bullet.y + bullet.height > enemy.y
+) {
+    explosions.push({
+        x: enemy.x,
+        y: enemy.y,
+        size: 40,
+        life: 20
+    });
+
+    enemies.splice(eIndex, 1);
+    bullets.splice(bIndex, 1);
+    score += 10;
+}
+                
             ) {
                 enemies.splice(eIndex, 1);
                 bullets.splice(bIndex, 1);
