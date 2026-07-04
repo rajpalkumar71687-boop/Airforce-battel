@@ -1,6 +1,7 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
-
+const playerImg = new Image();
+playerImg.src = "assets/player.png";
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -8,8 +9,8 @@ canvas.height = window.innerHeight;
 const player = {
   x: canvas.width / 2 - 25,
   y: canvas.height - 100,
-  width: 50,
-  height: 50,
+  width: 60,
+  height: 60,
   speed: 8
 };
 
@@ -139,7 +140,15 @@ function drawHUD() {
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  drawPlayer();
+  drawPlayer(function drawPlayer() {
+  ctx.drawImage(
+    playerImg,
+    player.x,
+    player.y,
+    player.width,
+    player.height
+  );
+                 });
   drawBullets();
   drawEnemies();
   drawExplosions();
