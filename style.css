@@ -1,10 +1,38 @@
-body{
+
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
     overflow:hidden;
-    background:black;
+    background:#000;
+    font-family:Arial,sans-serif;
 }
 
 canvas{
     display:block;
-    background:#001d3d;
+    width:100vw;
+    height:100vh;
+    background:linear-gradient(#001d3d,#003566);
+}
+
+#hud{
+    position:absolute;
+    top:10px;
+    left:10px;
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+    z-index:100;
+    text-shadow:2px 2px 4px black;
+}
+
+#score{
+    margin-bottom:10px;
+}
+
+#health{
+    color:lime;
 }
