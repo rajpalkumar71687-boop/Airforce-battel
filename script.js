@@ -139,7 +139,23 @@ function drawHUD() {
 
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+bgY += 2;
 
+if (bgY >= canvas.height) {
+  bgY = 0;
+}
+
+ctx.fillStyle = "#001d3d";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+ctx.strokeStyle = "#ffffff";
+
+for (let i = 0; i < canvas.height; i += 40) {
+  ctx.beginPath();
+  ctx.moveTo(canvas.width / 2, i + bgY);
+  ctx.lineTo(canvas.width / 2, i + 20 + bgY);
+  ctx.stroke();
+}
   drawPlayer(function drawPlayer() {
   ctx.drawImage(
     playerImg,
